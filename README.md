@@ -6,6 +6,9 @@ Note this currently only works on `pull request` events.
 
 ## Usage/Examples
 
+Note this example uses a woodpecker secret to pass the gitea token to the pipeline
+job.
+
 ```yaml
 pipeline:
   comment:
