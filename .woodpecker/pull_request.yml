@@ -1,0 +1,46 @@
+pipeline:
+  lint-go:
+    image: golangci/golangci-lint
+    group: lint-build
+    commands:
+      - golangci-lint run *.go --enable=gofumpt
+    when:
+      path: "*.go"
+  lint-docker:
+    image: hadolint/hadolint:latest-debian
+    group: lint-build
+    commands:
+      - hadolint --ignore DL3003 Dockerfile
+    when:
+      path: "Dockerfile"
+  build-go:
+    image: golang
+    group: lint-build
+    commands:
+      - go build
+    when:
+      path: ["Dockerfile", "*.go"]
+  build-docker-pr:
+    image: plugins/kaniko
+    settings:
+      repo: mcs94/gitea-comment
+      tags: latest
+      dockerfile: Dockerfile
+      no_push: true
+    when:
+      event: pull_request
+      branch: main
+      path: ["Dockerfile", "*.go"]
+  build-docker:
+    image: plugins/kaniko
+    settings:
+      repo: mcs94/gitea-comment
+      tags: latest
+      dockerfile: Dockerfile
+      username: mcs94
+      password:
+        from_secret: docker_password
+    when:
+      event: [push, tag]
+      branch: main
+      path: ["Dockerfile", "*.go"]
