@@ -4,7 +4,15 @@ A Woodpecker plugin to post comments onto a Gitea Pull Request.
 
 Note this currently only works on `pull request` events.
 
+You'll need to generate a [Gitea API token](https://docs.gitea.io/en-us/api-usage/) before
+you can use this.
+
 ## Usage/Examples
+
+This example uses a woodpecker secret to pass the gitea API token to the pipeline
+job. The secret is enabled for use on `pull requests` .
+
+![secrets](img/secret.png)
 
 ```yaml
 pipeline:
@@ -41,7 +49,7 @@ docker run \
 -e PLUGIN_COMMENT="test comment" \
 -e PLUGIN_GITEA_TOKEN="tokenhere" \
 -e PLUGIN_GITEA_ADDRESS="https://gitea.url.here" \
--e CI_REPO_OWNER="repoowwer" \
+-e CI_REPO_OWNER="repoowner" \
 -e CI_REPO_NAME="yourrepo" \
 -e CI_COMMIT_PULL_REQUEST=8 \
 test-gitea
