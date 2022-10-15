@@ -1,6 +1,6 @@
-# gitea-comment-plugin
+# gitea-pull-request-comment-plugin
 
-A Woodpecker plugin to post comments onto a Gitea Pull Request.
+A Woodpecker plugin to post comments onto a Gitea Pull Requests.
 
 Note this currently only works on `pull request` events.
 
