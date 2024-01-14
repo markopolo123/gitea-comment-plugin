@@ -1,6 +1,6 @@
 ---
 name: Gitea Comment
-authors: markopolo123
+author: markopolo123
 description: Plugin to add comments to a Gitea Pull Request
 tags: [Gitea, comment]
 containerImage: mcs94/gitea-comment
